@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -23,12 +25,12 @@ class RegisteredUserController extends Controller
   /**
    * Handle an incoming registration request.
    *
-   * @throws \Illuminate\Validation\ValidationException
+   * @throws ValidationException
    */
   public function store(Request $request): RedirectResponse {
     $request->validate([
       'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-      'password' => ['required', 'confirmed', 'min:4', 'max:13'],
+      'password' => ['required', 'confirmed', Rules\Password::defaults()],
     ]);
 
     $user = User::create([

@@ -11,26 +11,27 @@ export default defineConfig({
         laravel({
             input: ['resources/js/app.ts'],
             ssr: 'resources/js/ssr.ts',
-            refresh: true,
+            refresh: true
         }),
         vue({
             template: {
                 transformAssetUrls: {
                     base: null,
-                    includeAbsolute: false,
-                },
-            },
-        }),
+                    includeAbsolute: false
+                }
+            }
+        })
     ],
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './resources/js'),
-            'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
-        },
+            '@images': path.resolve(__dirname, './resources/images'),
+            'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy')
+        }
     },
     css: {
         postcss: {
-            plugins: [tailwindcss, autoprefixer],
-        },
-    },
+            plugins: [tailwindcss, autoprefixer]
+        }
+    }
 });

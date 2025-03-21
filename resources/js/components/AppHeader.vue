@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -16,8 +15,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { LayoutGrid, Menu, UserSearch } from 'lucide-vue-next';
+import { Menu, UserSearch } from 'lucide-vue-next';
 import { computed } from 'vue';
+import AppearanceTabs from '@/components/AppearanceTabs.vue';
+import AppLogo from '@/components/AppLogo.vue';
 
 interface Props {
   breadcrumbs?: BreadcrumbItem[];
@@ -37,11 +38,10 @@ const activeItemStyles = computed(
 );
 
 const mainNavItems: NavItem[] = [
-  {
-    title: 'Dashboard',
-    href: '/dashboard',
-    icon: LayoutGrid
-  }
+  { 'title': 'menu1', 'href': '#' },
+  { 'title': 'menu2', 'href': '#' },
+  { 'title': 'menu3', 'href': '#' },
+  { 'title': 'menu4', 'href': '#' }
 ];
 
 </script>
@@ -61,7 +61,7 @@ const mainNavItems: NavItem[] = [
             <SheetContent side="left" class="w-[300px] p-6">
               <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
               <SheetHeader class="flex justify-start text-left">
-                <AppLogoIcon class="size-6 fill-current text-black dark:text-white" />
+                <AppLogo />
               </SheetHeader>
               <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                 <nav class="-mx-3 space-y-1">
@@ -84,7 +84,8 @@ const mainNavItems: NavItem[] = [
         </div>
 
         <!-- Desktop Menu -->
-        <div class="hidden h-full lg:flex lg:flex-1">
+        <div class="hidden h-full lg:flex lg:flex-1 items-center">
+          <AppLogo />
           <NavigationMenu class="ml-10 flex h-full items-stretch">
             <NavigationMenuList class="flex h-full items-stretch space-x-2">
               <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index"
@@ -129,8 +130,8 @@ const mainNavItems: NavItem[] = [
               </template>
             </div>
           </div>
-
-          <DropdownMenu>
+          <AppearanceTabs />
+          <DropdownMenu v-if="$page.props.auth.user">
             <DropdownMenuTrigger :as-child="true">
               <Button
                 variant="ghost"
@@ -150,6 +151,14 @@ const mainNavItems: NavItem[] = [
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
+          <template v-else>
+            <Link :href="route('login')" class="auth">
+              로그인
+            </Link>
+            <Link :href="route('register')" class="auth">
+              회원가입
+            </Link>
+          </template>
         </div>
       </div>
     </div>
@@ -161,3 +170,8 @@ const mainNavItems: NavItem[] = [
     </div>
   </div>
 </template>
+<style scoped>
+.auth {
+  @apply inline-block rounded-sm border px-2 p-1 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]
+}
+</style>
