@@ -23,7 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
       <div
         class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
         <img src="/images/main/dream-main.png" alt="main">
-        <PlaceholderPattern />
+        <!--        <PlaceholderPattern />-->
       </div>
 
     </div>
