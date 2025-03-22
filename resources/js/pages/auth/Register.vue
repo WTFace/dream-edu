@@ -78,4 +78,14 @@ export default {
       <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
     </div>
   </form>
+
+  <hr>
+  <div>
+    <h3>간편 가입</h3>
+    <div class="flex items-center mt-2">
+      <a href="/social-redirect/naver" class="size-10">
+        <img src="/images/naver.png" alt="naver">
+      </a>
+    </div>
+  </div>
 </template>

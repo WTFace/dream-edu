@@ -83,4 +83,13 @@ export default {
       <TextLink :href="route('register')" :tabindex="5">가입하기</TextLink>
     </div>
   </form>
+  <hr>
+  <div>
+    <h3>간편 로그인</h3>
+    <div class="flex items-center mt-2">
+      <a href="/social-redirect/naver" class="size-10">
+        <img src="/images/naver.png" alt="naver">
+      </a>
+    </div>
+  </div>
 </template>
