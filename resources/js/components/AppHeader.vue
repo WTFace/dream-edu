@@ -6,14 +6,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/compon
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import UserMenuContent from '@/components/UserMenuContent.vue';
-import type { BreadcrumbItem, NavItem } from '@/types';
+import type { BreadcrumbItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 import { Menu, UserSearch } from 'lucide-vue-next';
 import { computed } from 'vue';
@@ -37,11 +35,31 @@ const activeItemStyles = computed(
   () => (url: string) => (isCurrentRoute.value(url) ? 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100' : '')
 );
 
-const mainNavItems: NavItem[] = [
-  { 'title': 'menu1', 'href': '#' },
-  { 'title': 'menu2', 'href': '#' },
-  { 'title': 'menu3', 'href': '#' },
-  { 'title': 'menu4', 'href': '#' }
+const mainNavItems = [
+  {
+    title: '주요활동', subMenu: [
+      { title: '청소년 육성사업', link: '/' },
+      { title: '장애인/미망인/고아 복지지원활동', link: '/' },
+      { title: '노인복지 지원사업', link: '/' },
+      { title: '문화교류사업', link: '/' },
+      { title: '인성교육사업', link: '/' },
+      { title: '책사랑도우미', link: '/' },
+      { title: '해외봉사 및 활동지원', link: '/' },
+      { title: '봉사활동(녹색환경,어린이 안전지킴이)', link: '/' }
+    ]
+  },
+  {
+    title: 'menu', subMenu: [
+      { title: 'sub menu', link: '#' },
+      { title: 'sub menu', link: '#' }
+    ]
+  },
+  {
+    title: 'menu', subMenu: [
+      { title: 'sub menu', link: '#' },
+      { title: 'sub menu', link: '#' }
+    ]
+  }
 ];
 
 </script>
@@ -88,16 +106,15 @@ const mainNavItems: NavItem[] = [
           <AppLogo />
           <NavigationMenu class="ml-10 flex h-full items-stretch">
             <NavigationMenuList class="flex h-full items-stretch space-x-2">
-              <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index"
-                                  class="relative flex h-full items-center">
-                <Link :href="item.href">
-                  <NavigationMenuLink
-                    :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']"
-                  >
-                    <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
-                    {{ item.title }}
-                  </NavigationMenuLink>
+              <NavigationMenuItem>
+                <Link :class="[navigationMenuTriggerStyle(), activeItemStyles('#'), 'h-9 cursor-pointer px-3']"
+                      href="#">국제드림교육원
                 </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu">
+                <div class="">
+                  {{ item.title }}
+                </div>
                 <div
                   v-if="isCurrentRoute(item.href)"
                   class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
@@ -108,28 +125,6 @@ const mainNavItems: NavItem[] = [
         </div>
 
         <div class="ml-auto flex items-center space-x-2">
-          <div class="relative flex items-center space-x-1">
-
-            <div class="hidden space-x-1 lg:flex">
-              <template v-for="item in rightNavItems" :key="item.title">
-                <TooltipProvider :delay-duration="0">
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Button variant="ghost" size="icon" as-child class="group h-9 w-9 cursor-pointer">
-                        <a :href="item.href" target="_blank" rel="noopener noreferrer">
-                          <span class="sr-only">{{ item.title }}</span>
-                          <component :is="item.icon" class="size-5 opacity-80 group-hover:opacity-100" />
-                        </a>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{{ item.title }}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </template>
-            </div>
-          </div>
           <AppearanceTabs />
           <DropdownMenu v-if="$page.props.auth.user">
             <DropdownMenuTrigger :as-child="true">
