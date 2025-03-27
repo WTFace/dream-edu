@@ -9,9 +9,11 @@ import AppShell from '@/components/AppShell.vue';
     <main class="md:max-w-7xl mx-auto flex w-full h-full p-4 flex-1 flex-col gap-4 rounded-xl">
       <slot />
     </main>
-    <SheetFooter class="p-4">
-      <hr>
-      footer ( 주소 및 연락처 등등 )
-    </SheetFooter>
+    <div class="flex flex-col p-4">
+      <hr class="py-1">
+      <div>
+        footer ( 주소 및 연락처 등등 )
+      </div>
+    </div>
   </AppShell>
 </template>

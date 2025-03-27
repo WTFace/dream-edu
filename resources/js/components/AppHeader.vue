@@ -83,7 +83,7 @@ const mainNavItems = [
                 <nav class="-mx-3 space-y-1">
                   <NavigationMenuItem>
                     <Link :class="[ activeItemStyles('/intro'), ' cursor-pointer']"
-                          href="intro">국제드림교육원
+                          :href="route('intro')">국제드림교육원
                     </Link>
                   </NavigationMenuItem>
                   <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
