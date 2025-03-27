@@ -3,12 +3,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-  navigationMenuTriggerStyle
-} from '@/components/ui/navigation-menu';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import type { BreadcrumbItem } from '@/types';
@@ -29,23 +24,32 @@ const props = withDefaults(defineProps<Props>(), {
 const page = usePage();
 const auth = computed(() => page.props.auth);
 
-const isCurrentRoute = computed(() => (url: string) => page.url === url);
+const isCurrentRoute = computed(() => (url: string) => {
+  if (page.url === '/') {
+    return url === '/';
+  }
+  return page.url.startsWith(url);
+});
 
 const activeItemStyles = computed(
-  () => (url: string) => (isCurrentRoute.value(url) ? 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100' : '')
+  () => (url: string) => (isCurrentRoute.value(url) ? 'border-b-2 dark:bg-neutral-800 dark:text-neutral-100' : '')
 );
 
 const mainNavItems = [
   {
-    title: '주요활동', subMenu: [
-      { title: '청소년 육성사업', link: '/' },
-      { title: '장애인/미망인/고아 복지지원활동', link: '/' },
-      { title: '노인복지 지원사업', link: '/' },
-      { title: '문화교류사업', link: '/' },
-      { title: '인성교육사업', link: '/' },
-      { title: '책사랑도우미', link: '/' },
-      { title: '해외봉사 및 활동지원', link: '/' },
-      { title: '봉사활동(녹색환경,어린이 안전지킴이)', link: '/' }
+    title: '봉사활동', path: '/support', subMenu: [
+      { title: '장애인/미망인/고아 지원활동', link: '/pwd' },
+      { title: '노인복지 지원사업', link: '/senior' },
+      { title: '해외봉사 및 활동지원', link: '/overseas' },
+      { title: '녹색환경,어린이 안전지킴이', link: '/safety' }
+    ]
+  },
+  {
+    title: '교육활동', path: '/education', subMenu: [
+      { title: '청소년 육성사업', link: '/youth' },
+      { title: '문화교류사업', link: '/culture' },
+      { title: '인성교육사업', link: '/mind' },
+      { title: '책사랑도우미', link: '/book' }
     ]
   },
   {
@@ -83,16 +87,18 @@ const mainNavItems = [
               </SheetHeader>
               <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                 <nav class="-mx-3 space-y-1">
-                  <Link
-                    v-for="item in mainNavItems"
-                    :key="item.title"
-                    :href="item.href"
-                    class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                    :class="activeItemStyles(item.href)"
-                  >
-                    <component v-if="item.icon" :is="item.icon" class="h-5 w-5" />
-                    {{ item.title }}
-                  </Link>
+                  <NavigationMenuItem>
+                    <Link :class="[ activeItemStyles('/intro'), ' cursor-pointer']"
+                          href="intro">국제드림교육원
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
+                                      :path="item.path"
+                                      :class="[ activeItemStyles(`${item.path}`), ' cursor-pointer']">
+                    <div class="">
+                      {{ item.title }}
+                    </div>
+                  </NavigationMenuItem>
                 </nav>
                 <div class="flex flex-col space-y-4">
                 </div>
@@ -107,18 +113,15 @@ const mainNavItems = [
           <NavigationMenu class="ml-10 flex h-full items-stretch">
             <NavigationMenuList class="flex h-full items-stretch space-x-2">
               <NavigationMenuItem>
-                <Link :class="[navigationMenuTriggerStyle(), activeItemStyles('#'), 'h-9 cursor-pointer px-3']"
-                      href="#">국제드림교육원
+                <Link :class="[ activeItemStyles('/intro'), 'cursor-pointer']"
+                      :href="route('intro')">국제드림교육원
                 </Link>
               </NavigationMenuItem>
-              <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu">
-                <div class="">
+              <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
+                                  :path="item.path">
+                <div :class="[ activeItemStyles(item.path), 'cursor-pointer']">
                   {{ item.title }}
                 </div>
-                <div
-                  v-if="isCurrentRoute(item.href)"
-                  class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
-                ></div>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>

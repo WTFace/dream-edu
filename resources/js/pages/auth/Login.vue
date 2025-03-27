@@ -31,6 +31,7 @@ export default {
 <template>
   <Head title="Log in" />
 
+  <!--  <AuthLayout>-->
   <form @submit.prevent="submit" class="flex flex-col gap-6">
     <div class="grid gap-6">
       <div class="grid gap-2">
@@ -92,4 +93,5 @@ export default {
       </a>
     </div>
   </div>
+  <!--  </AuthLayout>-->
 </template>
