@@ -17,11 +17,11 @@ const breadcrumbs: BreadcrumbItem[] = [
     <div class="grid auto-rows-min gap-4 md:grid-cols-2">
       <div
         class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-        <PlaceholderPattern />
+        <img src="/images/main/dream-main1.png" alt="main">
       </div>
       <div
         class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-        <img src="/images/main/dream-main.png" alt="main">
+        <img src="/images/main/dream-main2.png" alt="main">
       </div>
 
     </div>

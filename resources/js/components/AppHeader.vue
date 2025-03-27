@@ -32,7 +32,7 @@ const isCurrentRoute = computed(() => (url: string) => {
 });
 
 const activeItemStyles = computed(
-  () => (url: string) => (isCurrentRoute.value(url) ? 'border-b-2 dark:bg-neutral-800 dark:text-neutral-100' : '')
+  () => (url: string) => (isCurrentRoute.value(url) ? 'dark:border-teal-100 border-b-2 border-gray-400 dark:bg-neutral-800 dark:text-neutral-100' : '')
 );
 
 const mainNavItems = [
@@ -53,16 +53,10 @@ const mainNavItems = [
     ]
   },
   {
-    title: 'menu', subMenu: [
-      { title: 'sub menu', link: '#' },
-      { title: 'sub menu', link: '#' }
-    ]
+    title: 'menu', subMenu: []
   },
   {
-    title: 'menu', subMenu: [
-      { title: 'sub menu', link: '#' },
-      { title: 'sub menu', link: '#' }
-    ]
+    title: 'menu', subMenu: []
   }
 ];
 
