@@ -18,7 +18,7 @@ const breadcrumbs: BreadcrumbItem[] = [
       <div class="md:w-2/5">
         <h1 class="mb-1">국제드림교육원은?</h1>
         <div class="font-bold mb-1 md:mb-3">International Dream Education Center</div>
-        <div>탐라국의 정신을 바탕으로 설립된 국제구호개발 및 전국지역의 특성과 종교적인 틀에서 벗어나 <br>
+        <div>탐라국의 정신을 바탕으로 국제구호개발 및 전국지역의 특성과 종교적인 틀에서 벗어나 <br>
           장애인, 미망인, 노인, 고아 등 국내/외 인권 취약 계층에게 지속적인 구호사업과 지원을 통하여 <br>
           인권을 회복하며 신체적, 정신적, 사회적으로 꿈과 희망을 심어주는 활동에 정성을 다하고 있습니다.
         </div>
