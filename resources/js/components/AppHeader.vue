@@ -9,7 +9,7 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import type { BreadcrumbItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 import { Menu, UserSearch } from 'lucide-vue-next';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import AppearanceTabs from '@/components/AppearanceTabs.vue';
 import AppLogo from '@/components/AppLogo.vue';
 
@@ -47,19 +47,22 @@ const mainNavItems = [
   {
     title: '교육활동', path: '/education', subMenu: [
       { title: '청소년 육성사업', link: '/youth' },
-      { title: '문화교류사업', link: '/culture' },
+      // { title: '문화교류사업', link: '/culture' },
       { title: '인성교육사업', link: '/mind' },
       { title: '책사랑도우미', link: '/book' }
     ]
   },
   {
-    title: 'menu', subMenu: []
+    title: '소식', subMenu: []
   },
   {
-    title: 'menu', subMenu: []
+    title: '기부안내', subMenu: []
   }
 ];
-
+const dialogOpen = ref();
+const closeDialog = () => {
+  dialogOpen.value = false;
+};
 </script>
 
 <template>
@@ -67,8 +70,8 @@ const mainNavItems = [
     <div class="border-b border-sidebar-border/80">
       <div class="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
         <!-- Mobile Menu -->
-        <div class="lg:hidden">
-          <Sheet>
+        <div class="lg:hidden flex">
+          <Sheet v-model:open="dialogOpen">
             <SheetTrigger :as-child="true">
               <Button variant="ghost" size="icon" class="mr-2 h-9 w-9">
                 <Menu class="h-5 w-5" />
@@ -77,16 +80,12 @@ const mainNavItems = [
             <SheetContent side="left" class="w-[300px] p-6">
               <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
               <SheetHeader class="flex justify-start text-left">
-                <AppLogo />
+
               </SheetHeader>
               <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                 <nav class="-mx-3 space-y-1">
-                  <NavigationMenuItem>
-                    <Link :class="[ activeItemStyles('/intro'), ' cursor-pointer']"
-                          :href="route('intro')">국제드림교육원
-                    </Link>
-                  </NavigationMenuItem>
                   <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
+                                      @closeDialog="closeDialog"
                                       :path="item.path"
                                       :class="[ activeItemStyles(`${item.path}`), ' cursor-pointer']">
                     <div class="">
@@ -99,6 +98,9 @@ const mainNavItems = [
               </div>
             </SheetContent>
           </Sheet>
+          <div>
+            <AppLogo />
+          </div>
         </div>
 
         <!-- Desktop Menu -->
@@ -106,11 +108,6 @@ const mainNavItems = [
           <AppLogo />
           <NavigationMenu class="ml-10 flex h-full items-stretch">
             <NavigationMenuList class="flex h-full items-stretch space-x-2">
-              <NavigationMenuItem>
-                <Link :class="[ activeItemStyles('/intro'), 'cursor-pointer']"
-                      :href="route('intro')">국제드림교육원
-                </Link>
-              </NavigationMenuItem>
               <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
                                   :path="item.path">
                 <div :class="[ activeItemStyles(item.path), 'cursor-pointer']">

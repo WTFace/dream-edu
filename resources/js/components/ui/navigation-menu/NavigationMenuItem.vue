@@ -16,8 +16,10 @@ const toggle = () => {
     <ul
       v-if="subMenu?.length"
       class="sub-menu absolute left-0 top-14 z-10 flex w-auto min-w-40 flex-col bg-header-label transition-opacity duration-200 ease-in-out bg-neutral-100 p-1 dark:bg-neutral-800">
+
       <Link v-for="(sub, index) in subMenu" :key="index" :href='path + sub.link'
-            class="bg-header-label md:px-3 py-1.5 text-header-data transition-all duration-200 ease-in-out border-b-amber-600 hover:scale-110">
+            class="bg-header-label md:px-3 py-1.5 text-header-data transition-all duration-200 ease-in-out border-b-amber-600 hover:scale-110"
+            @click="$emit('closeDialog')">
         {{ sub.title }}
       </Link>
     </ul>
