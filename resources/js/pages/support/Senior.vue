@@ -46,7 +46,7 @@ const images = Array.from({ length: 4 }, (_, index) => ({
         <li>- 취약노인 발굴하여 학대예방/지원, 노인이용시설 안전관리/지원, 노인문화 복지활동 등 기타 노인권익증진 활동</li>
       </ul>
     </Mission>
-    <ImageWrap class="aspect-auto">
+    <ImageWrap aspect="auto">
       <img src="/images/senior/activity.png" alt="">
     </ImageWrap>
   </div>
