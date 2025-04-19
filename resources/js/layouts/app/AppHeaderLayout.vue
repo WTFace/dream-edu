@@ -7,7 +7,7 @@ import { Mail, Phone, Printer } from 'lucide-vue-next';
 <template>
   <AppShell class="flex-col">
     <AppHeader />
-    <main class="container flex h-full flex-1 flex-col rounded-xl">
+    <main class="container flex h-full flex-1 flex-col rounded-xl gap-2 md:gap-4 items-center">
       <slot />
     </main>
     <div class="text-sm text-gray-700 dark:text-gray-300 container leading-6">

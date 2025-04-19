@@ -37,10 +37,10 @@ const images = Array.from({ length: 4 }, (_, index) => ({
         </div>
       </Slide>
     </Carousel>
-    <Mission class="md:w-2/5 border-b-2 border-t-2 py-2">
+    <Mission class="md:w-2/5 border-b-2 border-t-2 py-3">
       2000년에 이미 고령화에 접어든 우리 사회는 노인의 삶의 질이 고형화 속도를 따라가지 못합니다. 노인이 활기차고 건강한 노후생활을 영위할 수 있도록 공익활동, 일자리, 재능나눔 등을 통해 노인복지 향상에 기여한다. <br>
 
-      <ul class="mt-2 text-sm">
+      <ul class="mt-2 text-sm leading-6">
         <li>- 노래교실, 실버잔치 등 신체 활동을 통해 즐거움을 나눕니다.</li>
         <li>- 노노케어: 건강한 노인이 거동이 불편한 노인을 방문 말벗이 되어주고 식사나 산책등 일상생활을 도와주는 활동</li>
         <li>- 취약노인 발굴하여 학대예방/지원, 노인이용시설 안전관리/지원, 노인문화 복지활동 등 기타 노인권익증진 활동</li>

@@ -12,8 +12,4 @@
 .mission {
   @apply leading-6
 }
-
-.mission span {
-  @apply font-bold
-}
 </style>
