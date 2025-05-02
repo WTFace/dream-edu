@@ -140,14 +140,14 @@ const closeDialog = () => {
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
-          <template v-else>
-            <Link :href="route('login')" class="auth">
-              로그인
-            </Link>
-            <Link :href="route('register')" class="auth">
-              회원가입
-            </Link>
-          </template>
+<!--          <template v-else>-->
+<!--            <Link :href="route('login')" class="auth">-->
+<!--              로그인-->
+<!--            </Link>-->
+<!--            <Link :href="route('register')" class="auth">-->
+<!--              회원가입-->
+<!--            </Link>-->
+<!--          </template>-->
         </div>
       </div>
     </div>
