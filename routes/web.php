@@ -23,6 +23,10 @@ Route::group(['prefix' => 'education'], function () {
   Route::get('book', fn() => Inertia::render('education/Book'))->name('book');
 });
 
+Route::group(['prefix' => 'donation'], function () {
+  Route::get('guide', fn() => Inertia::render('donation/Guide'));
+  Route::get('faq', fn() => Inertia::render('donation/Faq'));
+});
 
 Route::get('/social-redirect/{provider}', [SocialController::class, 'redirect'])->name('social.redirect');
 Route::get('/social-callback/{provider}', [SocialController::class, 'callback'])->name('social.callback');

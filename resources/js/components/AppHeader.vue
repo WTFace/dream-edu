@@ -7,7 +7,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/compon
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import type { BreadcrumbItem } from '@/types';
-import { Link, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { Menu, UserSearch } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import AppearanceTabs from '@/components/AppearanceTabs.vue';
@@ -53,10 +53,13 @@ const mainNavItems = [
     ]
   },
   {
-    title: '소식', subMenu: []
+    title: '실버대학', subMenu: []
   },
   {
-    title: '기부안내', subMenu: []
+    title: '후원', path: '/donation', subMenu: [
+      { title: '후원안내', link: '/guide' },
+      { title: '자주하는 질문', link: '/faq' }
+    ]
   }
 ];
 const dialogOpen = ref();
@@ -140,14 +143,14 @@ const closeDialog = () => {
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
-<!--          <template v-else>-->
-<!--            <Link :href="route('login')" class="auth">-->
-<!--              로그인-->
-<!--            </Link>-->
-<!--            <Link :href="route('register')" class="auth">-->
-<!--              회원가입-->
-<!--            </Link>-->
-<!--          </template>-->
+          <!--          <template v-else>-->
+          <!--            <Link :href="route('login')" class="auth">-->
+          <!--              로그인-->
+          <!--            </Link>-->
+          <!--            <Link :href="route('register')" class="auth">-->
+          <!--              회원가입-->
+          <!--            </Link>-->
+          <!--          </template>-->
         </div>
       </div>
     </div>
