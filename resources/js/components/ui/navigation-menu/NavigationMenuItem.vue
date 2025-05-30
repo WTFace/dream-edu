@@ -11,7 +11,7 @@ const toggle = () => {
 
 <template>
   <div @mouseover="!isMobile && (isHover = true)" @mouseleave="!isMobile && (isHover = false)"
-       @click="isMobile && toggle"
+       @click="toggle"
        class="relative flex py-2 lg:h-full items-center" :class="`${isHover ? 'show-sub' : 'hide-sub'}`">
     <slot />
     <ul
