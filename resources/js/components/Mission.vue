@@ -4,7 +4,10 @@
 
 <template>
   <div class="mission">
-    <slot/>
+    <div class="text-lg font-bold my-2">
+      <slot name="title" />
+    </div>
+    <slot />
   </div>
 </template>
 

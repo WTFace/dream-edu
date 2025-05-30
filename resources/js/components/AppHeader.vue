@@ -38,10 +38,10 @@ const activeItemStyles = computed(
 const mainNavItems = [
   {
     title: '봉사활동', path: '/support', subMenu: [
-      { title: '장애인/미망인/고아 지원활동', link: '/pwd' },
-      { title: '노인복지 지원사업', link: '/senior' },
-      { title: '해외봉사 및 활동지원', link: '/overseas' },
-      { title: '녹색환경,어린이 안전지킴이', link: '/safety' }
+      { title: '취약계층 지원', link: '/pwd' },
+      { title: '노인복지 지원', link: '/senior' },
+      { title: '해외봉사 지원', link: '/overseas' },
+      { title: '녹색환경,어린이 지킴이', link: '/safety' }
     ]
   },
   {
