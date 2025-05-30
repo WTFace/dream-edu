@@ -53,13 +53,13 @@ const mainNavItems = [
     ]
   },
   {
-    title: '실버대학', subMenu: []
-  },
-  {
     title: '후원', path: '/donation', subMenu: [
       { title: '후원안내', link: '/guide' },
       { title: '자주하는 질문', link: '/faq' }
     ]
+  },
+  {
+    title: '청춘교실', path: '/silver', subMenu: []
   }
 ];
 const dialogOpen = ref();
@@ -91,8 +91,11 @@ const closeDialog = () => {
                                       @closeDialog="closeDialog"
                                       :path="item.path"
                                       :class="[ activeItemStyles(`${item.path}`), ' cursor-pointer']">
-                    <div class="">
+                    <div v-if="item.subMenu.length">
                       {{ item.title }}
+                    </div>
+                    <div v-else>
+                      <Link :href="item.path">{{ item.title }}</Link>
                     </div>
                   </NavigationMenuItem>
                 </nav>
@@ -114,7 +117,12 @@ const closeDialog = () => {
               <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
                                   :path="item.path">
                 <div :class="[ activeItemStyles(item.path), 'cursor-pointer']">
-                  {{ item.title }}
+                  <div v-if="item.subMenu.length">
+                    {{ item.title }}
+                  </div>
+                  <div v-else>
+                    <Link :href="item.path">{{ item.title }}</Link>
+                  </div>
                 </div>
               </NavigationMenuItem>
             </NavigationMenuList>

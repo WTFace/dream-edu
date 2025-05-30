@@ -28,6 +28,8 @@ Route::group(['prefix' => 'donation'], function () {
   Route::get('faq', fn() => Inertia::render('donation/Faq'));
 });
 
+Route::get('silver', fn() => Inertia::render('Silver'));
+
 Route::get('/social-redirect/{provider}', [SocialController::class, 'redirect'])->name('social.redirect');
 Route::get('/social-callback/{provider}', [SocialController::class, 'callback'])->name('social.callback');
 
