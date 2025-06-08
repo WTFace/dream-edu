@@ -23,7 +23,7 @@ import { Mail, Phone, Printer } from 'lucide-vue-next';
       <div class="contact">
         <div>
           <component :is="Phone" class="inline w-4" />
-          문의 064-700-0000 (평일09:30~17:30)
+          문의 064-712-5755 (평일09:30~17:30)
         </div>
         <div>
           <component :is="Printer" class="inline w-4" />
