@@ -28,7 +28,16 @@ const images = Array.from({ length: 4 }, (_, index) => ({
 
 <template>
   <Head title="청춘교실" />
-  <h1>청춘교실</h1>
+  <h2 class="mb-1">행사 안내</h2>
+  <!--  admin upload later-->
+  <div class="flex flex-col md:flex-row md:gap-2">
+    <ImageWrap aspect="auto">
+      <img src="/images/banner/silver/event1.jpeg" alt="">
+    </ImageWrap>
+    <ImageWrap aspect="auto">
+      <img src="/images/banner/silver/event2.jpeg" alt="">
+    </ImageWrap>
+  </div>
 
   <Carousel v-bind="config" class="carousel-wrap">
     <Slide v-for="img in images" :key="img.id">
