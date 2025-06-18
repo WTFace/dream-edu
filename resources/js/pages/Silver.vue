@@ -35,7 +35,7 @@ const images = Array.from({ length: 4 }, (_, index) => ({
       <img src="/images/banner/silver/event1.jpeg" alt="">
     </ImageWrap>
     <ImageWrap aspect="auto">
-      <img src="/images/banner/silver/event2.jpeg" alt="">
+      <img src="/images/banner/silver/event3.jpeg" alt="">
     </ImageWrap>
   </div>
 
