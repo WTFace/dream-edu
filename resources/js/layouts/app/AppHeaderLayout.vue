@@ -2,6 +2,10 @@
 import AppHeader from '@/components/AppHeader.vue';
 import AppShell from '@/components/AppShell.vue';
 import { Mail, Phone, Printer } from 'lucide-vue-next';
+import { usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+const { companyName, companyId, address, ceo, bank, contact, fax, email } = page.props.footer;
 </script>
 
 <template>
@@ -12,22 +16,22 @@ import { Mail, Phone, Printer } from 'lucide-vue-next';
     </main>
     <div class="text-sm text-gray-700 dark:text-gray-300 container leading-6">
       <div>
-        <span class="text-md font-bold">(사) 국제드림교육원 </span> 고유번호 124-82-352-33 | 대표이사 고홍범
+        <span class="text-md font-bold">{{ companyName }} </span> {{ companyId }} | {{ ceo }}
       </div>
       <div>
-        (63110) 제주특별자치도 오광로6길 19, 1층 (이호이동)
+        {{ address }}
       </div>
       <div>
-        후원계좌: 농협 301-0366-8740-81
+        {{ bank }}
       </div>
       <div class="contact">
         <div>
           <component :is="Phone" class="inline w-4" />
-          문의 064-712-5755 (평일09:30~17:30)
+          문의 {{ contact }}
         </div>
         <div>
           <component :is="Printer" class="inline w-4" />
-          팩스 050-4059-0811 <span class="ml-4"><component :is="Mail" class="inline w-4" /> idecenter@naver.com</span>
+          팩스 {{ fax }} <span class="ml-4"><component :is="Mail" class="inline w-4" /> {{ email }}</span>
         </div>
       </div>
     </div>

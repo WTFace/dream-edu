@@ -50,6 +50,16 @@ class HandleInertiaRequests extends Middleware
         ...(new Ziggy)->toArray(),
         'location' => $request->url(),
       ],
+      'footer' => [
+        'companyName' => env('COMPANY_NAME'),
+        'companyId' => env('COMPANY_REG_ID'),
+        'address' => env('ADDRESS'),
+        'ceo' => env('CEO'),
+        'bank' => env('BANK'),
+        'contact' => env('CONTACT'),
+        'fax' => env('FAX'),
+        'email' => env('EMAIL'),
+      ]
     ];
   }
 }
