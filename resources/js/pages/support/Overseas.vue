@@ -7,15 +7,17 @@ import ImageWrap from '@/components/ImageWrap.vue';
 <template>
   <h1>해외봉사 지원</h1>
   <div class="md:w-1/2">
-    지구촌 모든 이들의  인권증진을 목표로 하는 구호사업은 다양한 캠페인과 쉽고 재미있는 기부를 통해 모두가 차별없이 함께 살아갈수 있는 사회를 만들고 있습니다.
-    나눔과 연대의 정신을 키우는 모금활동을 통해 도움이 필요한 곳과을 꾸준희 지원합니다.
+    지구촌 모든 이들의 인권증진을 목표로 하는 구호사업은 다양한 캠페인과 쉽고 재미있는 기부를 통해 모두가 차별없이 함께 살아갈수 있는 사회를 만들고 있습니다.
+    나눔과 연대의 정신을 키우는 모금활동을 통해 도움이 필요한 곳을 꾸준히 지원합니다.
   </div>
   <div class="grid auto-rows-min gap-4 md:grid-cols-2">
     <ImageWrap>
-      <img src="https://d2os5j0fcu66cq.cloudfront.net/goodnewscorps/web/assets/images/photo/gd_img02.jpg" alt="good news medical" >
+      <img src="https://d2os5j0fcu66cq.cloudfront.net/goodnewscorps/web/assets/images/photo/gd_img02.jpg"
+           alt="good news medical">
     </ImageWrap>
     <ImageWrap>
-      <img src="https://live.staticflickr.com/6155/6151775897_45aeb09264_c.jpg" alt="computer class" class="h-full w-full">
+      <img src="https://live.staticflickr.com/6155/6151775897_45aeb09264_c.jpg" alt="computer class"
+           class="h-full w-full">
     </ImageWrap>
     <Mission class="md:col-span-2 md:mx-[24%]">
       사람은 누구를 만나느냐에 따라 미래가 달라집니다.

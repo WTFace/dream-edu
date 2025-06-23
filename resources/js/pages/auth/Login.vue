@@ -2,7 +2,6 @@
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Head, useForm } from '@inertiajs/vue3';
@@ -66,12 +65,12 @@ export default {
         <InputError :message="form.errors.password" />
       </div>
 
-      <div class="flex items-center justify-between" :tabindex="3">
-        <Label for="remember" class="flex items-center space-x-3">
-          <Checkbox id="remember" v-model:checked="form.remember" :tabindex="4" />
-          <span>Remember me</span>
-        </Label>
-      </div>
+      <!--      <div class="flex items-center justify-between" :tabindex="3">-->
+      <!--        <Label for="remember" class="flex items-center space-x-3">-->
+      <!--          <Checkbox id="remember" v-model:checked="form.remember" :tabindex="4" />-->
+      <!--          <span>Remember me</span>-->
+      <!--        </Label>-->
+      <!--      </div>-->
 
       <Button type="submit" class="mt-4 w-full" :tabindex="4" :disabled="form.processing">
         <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
@@ -79,10 +78,10 @@ export default {
       </Button>
     </div>
 
-    <div class="text-center text-sm text-muted-foreground">
-      계정이 없다면
-      <TextLink :href="route('register')" :tabindex="5">가입하기</TextLink>
-    </div>
+    <!--    <div class="text-center text-sm text-muted-foreground">-->
+    <!--      계정이 없다면-->
+    <!--      <TextLink :href="route('register')" :tabindex="5">가입하기</TextLink>-->
+    <!--    </div>-->
   </form>
   <hr>
   <div>
