@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,6 +30,12 @@ Route::group(['prefix' => 'donation'], function () {
 });
 
 Route::get('silver', fn() => Inertia::render('Silver'));
+
+Route::group(['prefix' => 'banner'], function () {
+  Route::get('/', [BannerController::class, 'index'])->name('banner');
+  Route::post('create', [BannerController::class, 'store'])->name('banner.create');
+});
+
 
 Route::get('/social-redirect/{provider}', [SocialController::class, 'redirect'])->name('social.redirect');
 Route::get('/social-callback/{provider}', [SocialController::class, 'callback'])->name('social.callback');

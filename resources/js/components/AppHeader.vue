@@ -131,7 +131,7 @@ const closeDialog = () => {
 
         <div class="ml-auto flex items-center space-x-2">
           <AppearanceTabs />
-          <DropdownMenu v-if="$page.props.auth.user">
+          <DropdownMenu v-if="auth.user">
             <DropdownMenuTrigger :as-child="true">
               <Button
                 variant="ghost"
@@ -151,6 +151,7 @@ const closeDialog = () => {
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
+          <Link v-if="auth.user.admin" :href="route('banner')">행사관리</Link>
           <!--          <template v-else>-->
           <!--            <Link :href="route('login')" class="auth">-->
           <!--              로그인-->
