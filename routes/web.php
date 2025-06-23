@@ -34,7 +34,8 @@ Route::get('silver', [SilverController::class, 'index'])->name('silverClass');
 
 Route::group(['prefix' => 'banner'], function () {
   Route::get('/', [BannerController::class, 'index'])->name('banner');
-  Route::post('create', [BannerController::class, 'store'])->name('banner.create');
+  Route::post('/', [BannerController::class, 'store'])->name('banner.create');
+  Route::patch('{banner}', [BannerController::class, 'update'])->name('banner.update');
 });
 
 

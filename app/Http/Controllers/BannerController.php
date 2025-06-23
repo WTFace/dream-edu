@@ -25,4 +25,22 @@ class BannerController extends Controller
 
     return to_route('banner');
   }
+
+  public function update(Request $request, Banner $banner) {
+    $request->validate([
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+    $args = $request->all();
+
+    if ($args['image']) {
+      HandleImage::deleteModelSrc($banner->src);
+
+      $banner->src = HandleImage::saveSingleImg('banner', $banner->id, $args['image']);
+      $banner->save();
+    }
+
+    unset($args['image']);
+    $banner->update($args);
+    return redirect()->back();
+  }
 }

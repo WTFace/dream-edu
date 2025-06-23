@@ -28,7 +28,7 @@ function submit() {
 </script>
 
 <template>
-  <h1 class="w-full pb-5 text-center text-xl font-bold">{{ '생성' }}</h1>
+  <h1 class="w-full pb-5 text-center text-xl font-bold">생성 </h1>
 
   <form @submit.prevent="submit" enctype="multipart/form-data" class="space-y-4 text-xs">
     <div class="grid grid-cols-4 gap-x-1 gap-y-4">

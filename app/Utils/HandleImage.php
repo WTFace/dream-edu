@@ -28,6 +28,11 @@ class HandleImage
     Storage::disk('public')->deleteDirectory("{$directory}/{$id}");
   }
 
+  public static function deleteModelSrc(string $src) {
+    $path = str_replace(Storage::disk('public')->url(''), '', $src);
+    Storage::disk('public')->delete($path);
+  }
+
   public static function saveSingleImg($path, $id, $img) {
     $ext = $img->getClientOriginalExtension();
 
