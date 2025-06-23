@@ -151,7 +151,7 @@ const closeDialog = () => {
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link v-if="auth.user.admin" :href="route('banner')">행사관리</Link>
+          <Link v-if="auth.user?.admin" :href="route('banner')">행사관리</Link>
           <!--          <template v-else>-->
           <!--            <Link :href="route('login')" class="auth">-->
           <!--              로그인-->
