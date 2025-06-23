@@ -20,27 +20,28 @@ const config = {
     }
   }
 };
-const images = Array.from({ length: 4 }, (_, index) => ({
+const carouselImgs = Array.from({ length: 4 }, (_, index) => ({
   id: index + 1,
   url: `/images/silverClass/silver${index + 1}.jpeg`
 }));
+
+const props = defineProps({
+  banners: Array
+});
 </script>
 
 <template>
   <Head title="청춘교실" />
   <h2 class="mb-1">행사 안내</h2>
-  <!--  admin upload later-->
+
   <div class="flex flex-col md:flex-row md:gap-2">
-    <ImageWrap aspect="auto">
-      <img src="/images/banner/silver/event1.jpeg" alt="">
-    </ImageWrap>
-    <ImageWrap aspect="auto">
-      <img src="/images/banner/silver/event3.jpeg" alt="">
+    <ImageWrap aspect="auto" v-for="banner in banners" :key="banner.id">
+      <img :src="banner.src" alt="" class="md:max-h-[800px]">
     </ImageWrap>
   </div>
 
   <Carousel v-bind="config" class="carousel-wrap">
-    <Slide v-for="img in images" :key="img.id">
+    <Slide v-for="img in carouselImgs" :key="img.id">
       <div class="carousel__item ">
         <img :src="img.url" alt="" class="rounded-2xl">
       </div>

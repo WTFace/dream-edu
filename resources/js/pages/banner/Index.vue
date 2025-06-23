@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button/index.js';
 import { ref } from 'vue';
 import Create from '@/components/banner/Create.vue';
 import Modal from '@/components/Modal.vue';
+import { eventBannerType } from '@/lib/utils.js';
 
 const props = defineProps({
   banners: Array
@@ -24,7 +25,7 @@ const close = () => show.value = false;
     </thead>
     <tbody>
       <tr v-for="banner in banners">
-        <td>{{ banner.type }}</td>
+        <td>{{ eventBannerType[banner.type] }}</td>
         <td>
           <img :src="banner.src" alt="" class="max-h-[400px]">
         </td>

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button/index.js';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
 import { Label } from '@/components/ui/label/index.js';
+import { eventBannerType } from '@/lib/utils.js';
 
 const form = useForm({
   image: null,
@@ -31,8 +32,14 @@ function submit() {
 
   <form @submit.prevent="submit" enctype="multipart/form-data" class="space-y-4 text-xs">
     <div class="grid grid-cols-4 gap-x-1 gap-y-4">
+      <div>
+        <Label class="mx-2">종류</Label>
+        <select v-model="form.type">
+          <option :value="key" v-for="(value, key) in eventBannerType">{{ value }}</option>
+        </select>
+      </div>
       <div class="">
-        <Label value="파일" class="h-full" />
+        <Label class="h-full">파일</Label>
         <input type="file" @input="form.image = $event.target.files[0]" accept="image/*" @change="handleFileChange" />
         <InputError :errors="errors.image" />
       </div>

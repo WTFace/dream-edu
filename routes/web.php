@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\SilverController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,7 +30,7 @@ Route::group(['prefix' => 'donation'], function () {
   Route::get('faq', fn() => Inertia::render('donation/Faq'));
 });
 
-Route::get('silver', fn() => Inertia::render('Silver'));
+Route::get('silver', [SilverController::class, 'index'])->name('silverClass');
 
 Route::group(['prefix' => 'banner'], function () {
   Route::get('/', [BannerController::class, 'index'])->name('banner');
