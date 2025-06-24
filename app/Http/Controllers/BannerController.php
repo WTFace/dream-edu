@@ -43,4 +43,10 @@ class BannerController extends Controller
     $banner->update($args);
     return redirect()->back();
   }
+
+  public function destroy(Banner $banner) {
+    HandleImage::deleteModelSrc($banner->src);
+    $banner->delete();
+    return redirect()->back();
+  }
 }

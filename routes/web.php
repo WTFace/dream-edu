@@ -36,6 +36,7 @@ Route::group(['prefix' => 'banner'], function () {
   Route::get('/', [BannerController::class, 'index'])->name('banner');
   Route::post('/', [BannerController::class, 'store'])->name('banner.create');
   Route::patch('{banner}', [BannerController::class, 'update'])->name('banner.update');
+  Route::delete('{banner}', [BannerController::class, 'destroy'])->name('banner.destroy');
 });
 
 

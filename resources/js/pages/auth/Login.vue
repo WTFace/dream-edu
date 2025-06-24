@@ -30,7 +30,6 @@ export default {
 <template>
   <Head title="Log in" />
 
-  <!--  <AuthLayout>-->
   <form @submit.prevent="submit" class="flex flex-col gap-6">
     <div class="grid gap-6">
       <div class="grid gap-2">
@@ -84,13 +83,5 @@ export default {
     <!--    </div>-->
   </form>
   <hr>
-  <div>
-    <h3>간편 로그인</h3>
-    <div class="flex items-center mt-2">
-      <a href="/social-redirect/naver" class="size-10">
-        <img src="/images/naver.png" alt="naver">
-      </a>
-    </div>
-  </div>
-  <!--  </AuthLayout>-->
+  <!--  <SocialLogin />-->
 </template>

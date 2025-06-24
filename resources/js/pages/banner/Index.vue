@@ -6,6 +6,7 @@ import Create from '@/components/banner/Create.vue';
 import Modal from '@/components/Modal.vue';
 import { eventBannerType } from '@/lib/utils.js';
 import Edit from '@/components/banner/Edit.vue';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
   banners: Array
@@ -24,6 +25,10 @@ const closeEdit = () => {
 const setModalData = (data) => {
   modalData.value = data;
   showEdit.value = true;
+};
+
+const deleteBanner = (id) => {
+  confirm('delete this?') && router.delete(`/banner/${id}`, {});
 };
 </script>
 
@@ -46,7 +51,7 @@ const setModalData = (data) => {
         </td>
         <td class="space-x-2">
           <Button variant="outline" @click="setModalData(banner)">수정</Button>
-          <Button variant="destructive">삭제</Button>
+          <Button variant="destructive" @click="deleteBanner(banner.id)">삭제</Button>
         </td>
       </tr>
     </tbody>
