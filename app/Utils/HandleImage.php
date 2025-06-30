@@ -4,9 +4,12 @@ namespace App\Utils;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\ImageManager;
 
 class HandleImage
 {
+
   public static function saveImgFromContent(string $directory, string $content, $id) {
     preg_match_all('/data:image\/[a-zA-Z]+;base64,[^"]+/', $content, $matches);
     $base64Images = $matches[0];
@@ -33,11 +36,30 @@ class HandleImage
     Storage::disk('public')->delete($path);
   }
 
-  public static function saveSingleImg($path, $id, $img) {
-    $ext = $img->getClientOriginalExtension();
+  public static function resizeImage($img, $width = 680) {
+    // 680 x 458 for gallery
+    $maxSize = 512 * 1024;
+    $manager = new ImageManager(new Driver());
+    $image = $manager->read($img);
+    $image->scale(width: $width);
 
-    $name = $id . '-' . Carbon::now()->valueOf() . ".{$ext}";
-    Storage::disk('public')->putFileAs($path, $img, $name);
+    $quality = 90;
+    do {
+      $encoded = $image->toJpeg(quality: $quality)->toString();
+      $quality -= 5;
+    } while (strlen($encoded) >= $maxSize && $quality >= 10);
+
+    return $encoded;
+  }
+
+  public static function saveSingleImg($path, $id, $img) {
+    $name = $id . '-' . Carbon::now()->valueOf() . ".jpg"; // always save as JPEG
+
+    $encoded = self::resizeImage($img, 680);
+
+    // Save to public disk
+    Storage::disk('public')->put("{$path}/{$name}", $encoded);
+
     return Storage::disk('public')->url("{$path}/{$name}");
   }
 }
