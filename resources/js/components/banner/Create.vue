@@ -1,6 +1,5 @@
 <script setup>
 import { usePreview } from '@/composables/usePreview.js';
-import { ref } from 'vue';
 import { Button } from '@/components/ui/button/index.js';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
@@ -15,10 +14,8 @@ const emit = defineEmits(['close']);
 
 const { imagePreview, handleFileChange } = usePreview();
 
-const errors = ref({});
-
 function submit() {
-  form.post(route('banner.create'), {
+  form.post(route('banner.store'), {
     onFinish: () => {
       emit('close');
     }
@@ -41,7 +38,7 @@ function submit() {
       <div class="">
         <Label class="h-full">파일</Label>
         <input type="file" @input="form.image = $event.target.files[0]" accept="image/*" @change="handleFileChange" />
-        <InputError :errors="errors.image" />
+        <InputError :errors="form.errors.image" />
       </div>
       <div class="wrapper-height col-span-4 !h-auto !min-h-44 p-2">
         <img v-if="imagePreview" :src="imagePreview" alt="Selected Image" class="min-h-44 object-contain max-h-96" />

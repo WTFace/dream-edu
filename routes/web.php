@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\SilverController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +33,15 @@ Route::group(['prefix' => 'donation'], function () {
 
 Route::get('silver', [SilverController::class, 'index'])->name('silverClass');
 
+Route::group(['prefix' => 'footprint'], function () {
+  Route::get('gallery', [GalleryController::class, 'index']);
+  Route::get('gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+  Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
+});
+
 Route::group(['prefix' => 'banner'], function () {
   Route::get('/', [BannerController::class, 'index'])->name('banner');
-  Route::post('/', [BannerController::class, 'store'])->name('banner.create');
+  Route::post('/', [BannerController::class, 'store'])->name('banner.store');
   Route::patch('{banner}', [BannerController::class, 'update'])->name('banner.update');
   Route::delete('{banner}', [BannerController::class, 'destroy'])->name('banner.destroy');
 });

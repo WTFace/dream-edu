@@ -60,6 +60,13 @@ const mainNavItems = [
   },
   {
     title: '청춘교실', path: '/silver', subMenu: []
+  },
+  {
+    title: '소식', path: '/footprint', subMenu: [
+      { title: '언론보도', link: '/article' },
+      { title: '소식지', link: '/note' },
+      { title: '갤러리', link: '/gallery' }
+    ]
   }
 ];
 const dialogOpen = ref();

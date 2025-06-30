@@ -16,10 +16,16 @@ class HandleImage
 
     self::deleteDirectory($directory, $id);
     foreach ($base64Images as $key => $img) {
-      $fileName = $key . '-' . Carbon::now()->valueOf() . '.png';
+      $fileName = $key . '-' . Carbon::now()->valueOf() . '.jpg';
       $filePath = "{$directory}/{$id}/{$fileName}";
 
-      Storage::disk('public')->put($filePath, base64_decode(preg_replace('/^data:image\/\w+;base64,/', '', $img)));
+      // Convert base64 to raw binary string
+      $base64Str = preg_replace('/^data:image\/\w+;base64,/', '', $img);
+      $rawImage = base64_decode($base64Str);
+      $encoded = self::resizeImage($rawImage, 680);
+
+      Storage::disk('public')->put($filePath, $encoded);
+
       $url = Storage::disk('public')->url($filePath);
       $content = str_replace($img, $url, $content);
     }
@@ -54,10 +60,8 @@ class HandleImage
 
   public static function saveSingleImg($path, $id, $img) {
     $name = $id . '-' . Carbon::now()->valueOf() . ".jpg"; // always save as JPEG
-
     $encoded = self::resizeImage($img, 680);
 
-    // Save to public disk
     Storage::disk('public')->put("{$path}/{$name}", $encoded);
 
     return Storage::disk('public')->url("{$path}/{$name}");

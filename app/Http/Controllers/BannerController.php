@@ -15,7 +15,7 @@ class BannerController extends Controller
 
   public function store(Request $request) {
     $request->validate([
-      'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
     ]);
     $banner = Banner::create(['type' => $request->type]);
     $src = HandleImage::saveSingleImg('banner', $banner->id, $request->file('image'));
