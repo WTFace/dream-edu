@@ -1,8 +1,25 @@
 <script setup>
 import { Button } from '@/components/ui/button';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
+import Pagination from '@/components/Pagination.vue';
+import Modal from '@/components/Modal.vue';
+import Edit from '@/components/gallery/Edit.vue';
 
 const props = defineProps({ data: Array });
+const page = usePage();
+const auth = computed(() => page.props.auth);
+
+const showEdit = ref(false);
+const modalData = ref({});
+const closeEdit = () => {
+  showEdit.value = false;
+};
+
+const setModalData = (data) => {
+  modalData.value = data;
+  showEdit.value = true;
+};
 
 const destroy = (id) => {
   const url = route('gallery.destroy', { gallery: id });
@@ -11,21 +28,37 @@ const destroy = (id) => {
 </script>
 
 <template>
-  <Link :href="route('gallery.create')">글쓰기</Link>
-  <div class="flex gap-4 flex-col md:flex-row">
-    <div v-for="gallery in data.data" class="md:w-1/3" :key="gallery.id">
-      <img :src="gallery.thumbnail" alt="">
-      <div>{{ gallery.title }}</div>
+  <div class="w-full text-left">
+    <h2 class="">Gallery</h2>
+    <Button v-if="auth.user?.admin">
+      <Link :href="route('gallery.create')">글쓰기</Link>
+    </Button>
+  </div>
+
+  <div class="flex gap-8 flex-col md:flex-row flex-wrap mt-4">
+    <div v-for="gallery in data.data" :key="gallery.id" class="text-center">
+      <div @click="setModalData(gallery)" class="cursor-pointer">
+        <img :src="gallery.thumbnail" alt="thumbnail" class="w-96 h-72 object-contain">
+        <div class="my-2">{{ gallery.title }}</div>
+      </div>
       <div>
         {{ gallery.created_at }}
-        <span class="ml-2 space-x-1">
-          <Button variant="secondary">수정</Button>
-          <Button @click="destroy(gallery.id)" variant="destructive">삭제</Button>
+        <span class="ml-2 space-x-1" v-if="auth.user?.admin">
+          <Button size="sm" variant="secondary">수정</Button>
+          <Button size="sm" @click="destroy(gallery.id)" variant="destructive">삭제</Button>
         </span>
       </div>
       <!--      <div v-html="gallery.body"></div>-->
     </div>
   </div>
+  <div v-if="data.data.length > 0" class="my-4">
+    <Pagination :links="data.links" class="mt-4" />
+  </div>
+
+  <Modal :show="showEdit" @close="closeEdit">
+    <Edit @close="closeEdit" :modalData="modalData" />
+  </Modal>
+
 </template>
 
 <style scoped>

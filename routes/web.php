@@ -37,6 +37,7 @@ Route::group(['prefix' => 'footprint'], function () {
   Route::get('gallery', [GalleryController::class, 'index'])->name('gallery');
   Route::get('gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
   Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
+  Route::patch('{gallery}', [GalleryController::class, 'update'])->name('gallery.update');
   Route::delete('gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 });
 

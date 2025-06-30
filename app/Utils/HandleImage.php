@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use Carbon\Carbon;
+use DOMDocument;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
@@ -16,7 +17,6 @@ class HandleImage
 
     self::deleteDirectory($directory, $id);
 
-    $thumb = '';
     foreach ($base64Images as $key => $img) {
       $fileName = $key . '-' . Carbon::now()->valueOf() . '.jpg';
       $filePath = "{$directory}/{$id}/{$fileName}";
@@ -30,12 +30,9 @@ class HandleImage
 
       $url = Storage::disk('public')->url($filePath);
       $content = str_replace($img, $url, $content);
-      if ($thumb == '') {
-        $thumb = $url;
-      }
     }
 
-    return ['body' => $content, 'thumbnail' => $thumb];
+    return $content;
   }
 
   public static function deleteDirectory($directory, $id) {
@@ -71,4 +68,17 @@ class HandleImage
 
     return Storage::disk('public')->url("{$path}/{$name}");
   }
+
+  public static function extractFirstImageSrc(string $html): ?string {
+    $dom = new DOMDocument();
+
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    libxml_clear_errors();
+
+    $img = $dom->getElementsByTagName('img')->item(0);
+
+    return $img?->getAttribute('src');
+  }
+
 }

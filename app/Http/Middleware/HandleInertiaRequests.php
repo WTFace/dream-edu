@@ -49,6 +49,7 @@ class HandleInertiaRequests extends Middleware
       'ziggy' => [
         ...(new Ziggy)->toArray(),
         'location' => $request->url(),
+        'query' => $request->query()
       ],
       'footer' => [
         'companyName' => env('COMPANY_NAME'),
