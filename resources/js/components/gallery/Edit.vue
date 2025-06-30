@@ -9,7 +9,7 @@ import { ref } from 'vue';
 import { Input } from '@/components/ui/input/index.js';
 import WangEditor from '@/components/WangEditor.vue';
 
-const props = defineProps({ modalData: Object });
+const props = defineProps({ modalData: Object, isAdmin: Boolean });
 
 const { id, title, type, body } = props.modalData;
 const form = useForm({
@@ -39,19 +39,20 @@ function submit() {
 </script>
 
 <template>
-  <h1 class="w-full pb-5 text-center text-xl font-bold">수정</h1>
-
-  <form @submit.prevent="submit" enctype="multipart/form-data" class="space-y-4 text-xs">
+  <form v-if="isAdmin" @submit.prevent="submit" enctype="multipart/form-data" class="space-y-2 text-xs">
+    <h1 class="w-full pb-3 text-center text-xl font-bold">수정</h1>
     <div>
       <Label class="mx-2">종류</Label>
-      <select v-model="form.type">
+      <select v-model="form.type" class="ml-2">
         <option :value="key" v-for="(value, key) in eventBannerType">{{ value }}</option>
       </select>
     </div>
 
     <div>
-      <Label class="mx-2">제목</Label>
-      <Input type="text" v-model="form.title" />
+      <div class="flex items-center">
+        <Label class="mx-2 w-8">제목</Label>
+        <Input type="text" v-model="form.title" />
+      </div>
       <InputError :message="form.errors.title" />
     </div>
 
@@ -62,6 +63,10 @@ function submit() {
 
     <Button>저장</Button>
   </form>
+  <div v-else class="w-full px-6">
+    <div class="p-2 text-xl">{{ title }}</div>
+    <div v-html="body"></div>
+  </div>
 </template>
 
 <style scoped></style>

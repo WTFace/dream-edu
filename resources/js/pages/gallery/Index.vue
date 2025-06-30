@@ -9,6 +9,7 @@ import Edit from '@/components/gallery/Edit.vue';
 const props = defineProps({ data: Array });
 const page = usePage();
 const auth = computed(() => page.props.auth);
+const isAdmin = auth.value.user?.admin;
 
 const showEdit = ref(false);
 const modalData = ref({});
@@ -30,7 +31,7 @@ const destroy = (id) => {
 <template>
   <div class="w-full text-left">
     <h2 class="">Gallery</h2>
-    <Button v-if="auth.user?.admin">
+    <Button v-if="isAdmin">
       <Link :href="route('gallery.create')">글쓰기</Link>
     </Button>
   </div>
@@ -43,8 +44,7 @@ const destroy = (id) => {
       </div>
       <div>
         {{ gallery.created_at }}
-        <span class="ml-2 space-x-1" v-if="auth.user?.admin">
-          <Button size="sm" variant="secondary">수정</Button>
+        <span class="ml-4" v-if="isAdmin">
           <Button size="sm" @click="destroy(gallery.id)" variant="destructive">삭제</Button>
         </span>
       </div>
@@ -56,7 +56,7 @@ const destroy = (id) => {
   </div>
 
   <Modal :show="showEdit" @close="closeEdit">
-    <Edit @close="closeEdit" :modalData="modalData" />
+    <Edit @close="closeEdit" :modalData="modalData" :isAdmin="isAdmin" />
   </Modal>
 
 </template>

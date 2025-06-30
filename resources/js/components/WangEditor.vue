@@ -74,7 +74,7 @@ const handleCreated = (editor) => {
 <template>
   <div style="border: 1px solid #ccc">
     <Toolbar :editor="editorRef" :defaultConfig="toolbarConfig" style="border-bottom: 1px solid #ccc" />
-    <Editor :defaultConfig="editorConfig" v-model="innerValueHtml" style="height: 500px" @onCreated="handleCreated" />
+    <Editor :defaultConfig="editorConfig" v-model="innerValueHtml" style="height: 560px" @onCreated="handleCreated" />
   </div>
 </template>
 

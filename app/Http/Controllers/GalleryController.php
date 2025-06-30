@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class GalleryController extends Controller
 {
   public function index() {
-    $data = Gallery::filter(request(['type']))->paginate(3);
+    $data = Gallery::filter(request(['type']))->paginate(12);
     return inertia()->render('gallery/Index', compact('data'));
   }
 
