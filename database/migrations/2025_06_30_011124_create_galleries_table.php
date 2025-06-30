@@ -12,6 +12,7 @@ return new class extends Migration {
     Schema::create('galleries', function (Blueprint $table) {
       $table->id();
       $table->string('title', 40);
+      $table->string('thumbnail', 80)->nullable();
       $table->text('body');
       $table->string('type', 15);
       $table->timestamps();

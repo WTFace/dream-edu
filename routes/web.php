@@ -34,9 +34,10 @@ Route::group(['prefix' => 'donation'], function () {
 Route::get('silver', [SilverController::class, 'index'])->name('silverClass');
 
 Route::group(['prefix' => 'footprint'], function () {
-  Route::get('gallery', [GalleryController::class, 'index']);
+  Route::get('gallery', [GalleryController::class, 'index'])->name('gallery');
   Route::get('gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
   Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
+  Route::delete('gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 });
 
 Route::group(['prefix' => 'banner'], function () {

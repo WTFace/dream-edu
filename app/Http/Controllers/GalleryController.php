@@ -23,9 +23,17 @@ class GalleryController extends Controller
     $data['body'] = 'temp';
 
     $gallery = Gallery::create($data);
-    $gallery->body = HandleImage::saveImgFromContent('gallery', $content, $gallery->id);
+    $contents = HandleImage::saveImgFromContent('gallery', $content, $gallery->id);
+    $gallery->body = $contents['body'];
+    $gallery->thumbnail = $contents['thumbnail'];
     $gallery->save();
 
-    return redirect()->route('gallery.Index');
+    return redirect()->route('gallery');
+  }
+
+  public function destroy(Gallery $gallery) {
+    HandleImage::deleteDirectory('gallery', $gallery->id);
+    $gallery->delete();
+    return redirect()->back();
   }
 }

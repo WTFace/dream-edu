@@ -15,6 +15,8 @@ class HandleImage
     $base64Images = $matches[0];
 
     self::deleteDirectory($directory, $id);
+
+    $thumb = '';
     foreach ($base64Images as $key => $img) {
       $fileName = $key . '-' . Carbon::now()->valueOf() . '.jpg';
       $filePath = "{$directory}/{$id}/{$fileName}";
@@ -28,9 +30,12 @@ class HandleImage
 
       $url = Storage::disk('public')->url($filePath);
       $content = str_replace($img, $url, $content);
+      if ($thumb == '') {
+        $thumb = $url;
+      }
     }
 
-    return $content;
+    return ['body' => $content, 'thumbnail' => $thumb];
   }
 
   public static function deleteDirectory($directory, $id) {
@@ -47,7 +52,7 @@ class HandleImage
     $maxSize = 512 * 1024;
     $manager = new ImageManager(new Driver());
     $image = $manager->read($img);
-    $image->scale(width: $width);
+    $image->scaleDown(width: $width);
 
     $quality = 90;
     do {

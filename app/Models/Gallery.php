@@ -11,4 +11,10 @@ class Gallery extends Model
   public function scopeFilter($query, array $filters) {
     $query->when($filters['type'] ?? false, fn($query, $search) => $query->where('type', $search));
   }
+
+  protected function casts(): array {
+    return [
+      'created_at' => 'datetime:Y-m-d',
+    ];
+  }
 }
