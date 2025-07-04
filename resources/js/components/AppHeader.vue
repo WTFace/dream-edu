@@ -159,7 +159,18 @@ const closeDialog = () => {
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link v-if="auth.user?.admin" :href="route('banner')">관리</Link>
+
+          <DropdownMenu v-if="auth.user?.admin">
+            <DropdownMenuTrigger :as-child="true">
+              <Button variant="ghost" size="icon" class="relative size-10 w-auto p-1">
+                관리
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" class="w-56 flex flex-col p-2">
+              <Link :href="route('banner')">행사</Link>
+              <Link :href="route('logo')">로고</Link>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
         </div>
       </div>
