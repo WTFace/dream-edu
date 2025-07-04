@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\LogoController;
 use App\Http\Controllers\SilverController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::group(['prefix' => 'banner'], function () {
   Route::patch('{banner}', [BannerController::class, 'update'])->name('banner.update');
   Route::delete('{banner}', [BannerController::class, 'destroy'])->name('banner.destroy');
 });
+
+Route::get('logo', [LogoController::class, 'index'])->name('logo');
+Route::post('logo', [LogoController::class, 'store'])->name('logo.store');
 
 
 Route::get('/social-redirect/{provider}', [SocialController::class, 'redirect'])->name('social.redirect');

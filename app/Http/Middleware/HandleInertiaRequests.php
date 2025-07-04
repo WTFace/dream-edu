@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Banner;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -38,6 +39,7 @@ class HandleInertiaRequests extends Middleware
     $quotes = Inspiring::quotes();
     $quotes->pop();
     [$message, $author] = str($quotes->random())->explode('-');
+    $logo = Banner::where('type', 'logo')->first();
 
     return [
       ...parent::share($request),
@@ -51,6 +53,7 @@ class HandleInertiaRequests extends Middleware
         'location' => $request->url(),
         'query' => $request->query()
       ],
+      'logo' => $logo->src,
       'footer' => [
         'companyName' => env('COMPANY_NAME'),
         'companyId' => env('COMPANY_REG_ID'),

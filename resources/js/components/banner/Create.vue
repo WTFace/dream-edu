@@ -1,18 +1,15 @@
 <script setup>
-import { usePreview } from '@/composables/usePreview.js';
 import { Button } from '@/components/ui/button/index.js';
 import { useForm } from '@inertiajs/vue3';
-import InputError from '@/components/InputError.vue';
 import { Label } from '@/components/ui/label/index.js';
 import { eventBannerType } from '@/lib/utils.js';
+import ImageUpload from '@/components/ImageUpload.vue';
 
 const form = useForm({
   image: null,
   type: 'silverClass'
 });
 const emit = defineEmits(['close']);
-
-const { imagePreview, handleFileChange } = usePreview();
 
 function submit() {
   form.post(route('banner.store'), {
@@ -35,15 +32,7 @@ function submit() {
           <option :value="key" v-for="(value, key) in eventBannerType">{{ value }}</option>
         </select>
       </div>
-      <div class="">
-        <Label class="h-full">파일</Label>
-        <input type="file" @input="form.image = $event.target.files[0]" accept="image/*" @change="handleFileChange" />
-        <InputError :errors="form.errors.image" />
-      </div>
-      <div class="wrapper-height col-span-4 !h-auto !min-h-44 p-2">
-        <img v-if="imagePreview" :src="imagePreview" alt="Selected Image" class="min-h-44 object-contain max-h-96" />
-        <div v-else>Image Preview</div>
-      </div>
+      <ImageUpload :form="form" />
     </div>
 
     <div class="flex items-center justify-end gap-2">

@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const page = usePage();
 const auth = computed(() => page.props.auth);
+const logo = page.props.logo;
 
 const isCurrentRoute = computed(() => (url: string) => {
   if (page.url === '/') {
@@ -112,13 +113,13 @@ const closeDialog = () => {
             </SheetContent>
           </Sheet>
           <div>
-            <AppLogo />
+            <AppLogo :logo="logo" />
           </div>
         </div>
 
         <!-- Desktop Menu -->
         <div class="hidden h-full lg:flex lg:flex-1 items-center">
-          <AppLogo />
+          <AppLogo :logo="logo" />
           <NavigationMenu class="ml-10 flex h-full items-stretch">
             <NavigationMenuList class="flex h-full items-stretch space-x-2">
               <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" :subMenu="item.subMenu"
@@ -158,15 +159,8 @@ const closeDialog = () => {
               <UserMenuContent :user="auth.user" />
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link v-if="auth.user?.admin" :href="route('banner')">행사관리</Link>
-          <!--          <template v-else>-->
-          <!--            <Link :href="route('login')" class="auth">-->
-          <!--              로그인-->
-          <!--            </Link>-->
-          <!--            <Link :href="route('register')" class="auth">-->
-          <!--              회원가입-->
-          <!--            </Link>-->
-          <!--          </template>-->
+          <Link v-if="auth.user?.admin" :href="route('banner')">관리</Link>
+
         </div>
       </div>
     </div>
