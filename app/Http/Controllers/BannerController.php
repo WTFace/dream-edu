@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class BannerController extends Controller
 {
   public function index() {
-    $banners = Banner::filter(request(['type']))->get();
+    $banners = Banner::filter(request(['type']))
+      ->whereNot('type', 'logo')->get();
     return inertia()->render('banner/Index', compact('banners'));
   }
 
@@ -49,4 +50,5 @@ class BannerController extends Controller
     $banner->delete();
     return redirect()->back();
   }
+
 }

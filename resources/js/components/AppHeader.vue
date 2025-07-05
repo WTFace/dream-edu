@@ -47,9 +47,9 @@ const mainNavItems = [
   },
   {
     title: '교육활동', path: '/education', subMenu: [
-      { title: '청소년 육성사업', link: '/youth' },
-      // { title: '문화교류사업', link: '/culture' },
-      { title: '인성교육사업', link: '/mind' },
+      { title: '청소년 육성', link: '/youth' },
+      { title: '문화 교류', link: '/culture' },
+      { title: '인성 교육', link: '/mind' },
       { title: '책사랑도우미', link: '/book' }
     ]
   },

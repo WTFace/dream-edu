@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h1>청소년 육성사업</h1>
+  <h2>청소년 육성사업</h2>
 </template>
 
 <style scoped>

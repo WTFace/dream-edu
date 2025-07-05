@@ -5,6 +5,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\SilverController;
 use App\Http\Controllers\SocialController;
+use App\Utils\BannerQuery;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -22,7 +23,7 @@ Route::group(['prefix' => 'support'], function () {
 
 Route::group(['prefix' => 'education'], function () {
   Route::get('youth', fn() => Inertia::render('education/Youth'))->name('youth');
-  Route::get('culture', fn() => Inertia::render('education/Culture'))->name('culture');
+  Route::get('culture', fn() => Inertia::render('education/Culture', ['banners' => BannerQuery::culture()]))->name('culture');
   Route::get('mind', fn() => Inertia::render('education/Mind'))->name('mind');
   Route::get('book', fn() => Inertia::render('education/Book'))->name('book');
 });
@@ -40,13 +41,17 @@ Route::group(['prefix' => 'footprint'], function () {
   Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
   Route::patch('{gallery}', [GalleryController::class, 'update'])->name('gallery.update');
   Route::delete('gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
+  Route::get('article', fn() => Inertia::render('article/Index'));
+  Route::get('note', fn() => Inertia::render('note/Index'));
+
 });
 
-Route::group(['prefix' => 'banner'], function () {
-  Route::get('/', [BannerController::class, 'index'])->name('banner');
-  Route::post('/', [BannerController::class, 'store'])->name('banner.store');
-  Route::patch('{banner}', [BannerController::class, 'update'])->name('banner.update');
-  Route::delete('{banner}', [BannerController::class, 'destroy'])->name('banner.destroy');
+Route::group(['prefix' => 'banner', 'middleware' => 'auth', 'controller' => BannerController::class], function () {
+  Route::get('/', 'index')->name('banner');
+  Route::post('/', 'store')->name('banner.store');
+  Route::patch('{banner}', 'update')->name('banner.update');
+  Route::delete('{banner}', 'destroy')->name('banner.destroy');
 });
 
 Route::get('logo', [LogoController::class, 'index'])->name('logo');

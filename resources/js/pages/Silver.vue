@@ -33,7 +33,6 @@ const props = defineProps({
 <template>
   <Head title="청춘교실" />
   <h2 class="mb-1">행사 안내</h2>
-
   <div class="flex flex-col md:flex-row md:gap-2">
     <ImageWrap aspect="auto" v-for="banner in banners" :key="banner.id">
       <img :src="banner.src" alt="" class="md:max-h-[800px]">

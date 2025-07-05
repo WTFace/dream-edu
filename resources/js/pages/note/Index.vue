@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h2>책사랑</h2>
+  <h2>note</h2>
 </template>
 
 <style scoped>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h1>humanity</h1>
+  <h2>인성교육</h2>
 </template>
 
 <style scoped>
