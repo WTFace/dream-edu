@@ -3,7 +3,6 @@
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LogoController;
-use App\Http\Controllers\SilverController;
 use App\Http\Controllers\SocialController;
 use App\Utils\BannerQuery;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +32,7 @@ Route::group(['prefix' => 'donation'], function () {
   Route::get('faq', fn() => Inertia::render('donation/Faq'));
 });
 
-Route::get('silver', [SilverController::class, 'index'])->name('silverClass');
+Route::get('silver', fn() => Inertia::render('Silver', ['banners' => BannerQuery::silverClass()]))->name('silverClass');
 
 Route::group(['prefix' => 'footprint'], function () {
   Route::get('gallery', [GalleryController::class, 'index'])->name('gallery');

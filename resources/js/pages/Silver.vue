@@ -4,6 +4,7 @@ import ImageWrap from '@/components/ImageWrap.vue';
 import Mission from '@/components/Mission.vue';
 import { Carousel, Slide } from 'vue3-carousel';
 import { Head } from '@inertiajs/vue3';
+import EventBanner from '@/components/EventBanner.vue';
 
 const config = {
   height: 320,
@@ -32,12 +33,9 @@ const props = defineProps({
 
 <template>
   <Head title="청춘교실" />
-  <h2 class="mb-1">행사 안내</h2>
-  <div class="flex flex-col md:flex-row md:gap-2">
-    <ImageWrap aspect="auto" v-for="banner in banners" :key="banner.id">
-      <img :src="banner.src" alt="" class="md:max-h-[800px]">
-    </ImageWrap>
-  </div>
+  <h1>청춘교실</h1>
+
+  <EventBanner :banners="banners" />
 
   <Carousel v-bind="config" class="carousel-wrap">
     <Slide v-for="img in carouselImgs" :key="img.id">
