@@ -4,6 +4,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\TestController;
 use App\Utils\BannerQuery;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,6 +60,8 @@ Route::post('logo', [LogoController::class, 'store'])->name('logo.store');
 
 Route::get('/social-redirect/{provider}', [SocialController::class, 'redirect'])->name('social.redirect');
 Route::get('/social-callback/{provider}', [SocialController::class, 'callback'])->name('social.callback');
+
+Route::get('/test', [TestController::class, 'index']);
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

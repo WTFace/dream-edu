@@ -7,6 +7,7 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 import AppLayout from './layouts/AppLayout.vue';
+import './echo';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TestEvent;
 use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
 use App\Utils\HandleImage;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 class GalleryController extends Controller
 {
   public function index() {
+    TestEvent::dispatch('cashIn');
     $data = Gallery::filter(request(['type']))->paginate(12);
     return inertia()->render('gallery/Index', compact('data'));
   }
