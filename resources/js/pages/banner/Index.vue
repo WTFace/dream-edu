@@ -4,37 +4,27 @@ import { Button } from '@/components/ui/button/index.js';
 import { ref } from 'vue';
 import Create from '@/components/banner/Create.vue';
 import Modal from '@/components/Modal.vue';
-import { eventBannerType } from '@/lib/utils.js';
+import { closeEdit, deleteModel, eventBannerType, setModalData } from '@/lib/utils.js';
 import Edit from '@/components/banner/Edit.vue';
-import { router } from '@inertiajs/vue3';
+import { showEdit } from '@/store.js';
 
 const props = defineProps({
   banners: Array
 });
-const modalData = ref({});
 
 const show = ref(false);
 const close = () => {
   show.value = false;
 };
 
-const showEdit = ref(false);
-const closeEdit = () => {
-  showEdit.value = false;
-};
-const setModalData = (data) => {
-  modalData.value = data;
-  showEdit.value = true;
-};
-
-const deleteBanner = (id) => {
-  confirm('delete this?') && router.delete(`/banner/${id}`, {});
-};
 </script>
 
 <template>
-  <h2>행사 배너 관리</h2>
-  <Button @click="show = true">추가</Button>
+  <div class="flex justify-start w-full gap-2">
+
+    <h2>행사 배너 관리</h2>
+    <Button @click="show = true" size="sm">추가</Button>
+  </div>
   <table>
     <thead>
       <tr>
@@ -51,7 +41,7 @@ const deleteBanner = (id) => {
         </td>
         <td class="space-x-2">
           <Button variant="outline" @click="setModalData(banner)">수정</Button>
-          <Button variant="destructive" @click="deleteBanner(banner.id)">삭제</Button>
+          <Button variant="destructive" @click="deleteModel(banner.id, 'banner')">삭제</Button>
         </td>
       </tr>
     </tbody>
@@ -61,7 +51,7 @@ const deleteBanner = (id) => {
     <Create @close="close" />
   </Modal>
   <Modal :show="showEdit" @close="closeEdit">
-    <Edit @close="closeEdit" :modalData="modalData" />
+    <Edit @close="closeEdit" />
   </Modal>
 </template>
 

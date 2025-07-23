@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'article', 'controller' => Art
   Route::get('create', 'create')->name('article.create');
   Route::post('', 'store')->name('article.store');
   Route::patch('{article}', 'update')->name('article.update');
-  Route::delete('article/{article}', 'destroy')->name('article.destroy');
+  Route::delete('{article}', 'destroy')->name('article.destroy');
 });
 
 Route::group(['middleware' => 'auth', 'controller' => GalleryController::class], function () {

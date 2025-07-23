@@ -8,10 +8,11 @@ import { Label } from '@/components/ui/label/index.js';
 import { ref } from 'vue';
 import { Input } from '@/components/ui/input/index.js';
 import WangEditor from '@/components/WangEditor.vue';
+import { modalData } from '@/store.js';
 
-const props = defineProps({ modalData: Object, isAdmin: Boolean });
+const props = defineProps({ isAdmin: Boolean });
 
-const { id, title, type, body } = props.modalData;
+const { id, title, type, body } = modalData.value;
 const form = useForm({
   title,
   type,

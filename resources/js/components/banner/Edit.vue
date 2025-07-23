@@ -6,10 +6,9 @@ import { Button } from '@/components/ui/button/index.js';
 import InputError from '@/components/InputError.vue';
 import { Label } from '@/components/ui/label/index.js';
 import { ref } from 'vue';
+import { modalData } from '@/store.js';
 
-const props = defineProps({ modalData: Object });
-
-const { id, type } = props.modalData;
+const { id, type } = modalData.value;
 const form = useForm({
   image: null,
   type
@@ -30,12 +29,6 @@ function submit() {
       emit('close');
     }
   });
-
-  // form.post(route('banner.update', id), {
-  //   onSuccess: () => {
-  //     emit('close');
-  //   }
-  // });
 }
 </script>
 

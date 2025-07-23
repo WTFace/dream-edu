@@ -1,31 +1,15 @@
 <script setup>
 import { Button } from '@/components/ui/button';
-import { router, usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { closeEdit, deleteModel, setModalData } from '@/lib/utils.js';
+import { showEdit } from '@/store.js';
 import Pagination from '@/components/Pagination.vue';
 import Modal from '@/components/Modal.vue';
 import Edit from '@/components/gallery/Edit.vue';
 
 const props = defineProps({ data: Array });
-const page = usePage();
-const auth = computed(() => page.props.auth);
-const isAdmin = auth.value.user?.admin;
+const isAdmin = usePage().props.auth.user?.admin;
 
-const showEdit = ref(false);
-const modalData = ref({});
-const closeEdit = () => {
-  showEdit.value = false;
-};
-
-const setModalData = (data) => {
-  modalData.value = data;
-  showEdit.value = true;
-};
-
-const destroy = (id) => {
-  const url = route('gallery.destroy', { gallery: id });
-  confirm('delete this?') && router.delete(url);
-};
 </script>
 
 <template>
@@ -45,7 +29,7 @@ const destroy = (id) => {
       <div>
         {{ gallery.created_at }}
         <span class="ml-4" v-if="isAdmin">
-          <Button size="sm" @click="destroy(gallery.id)" variant="destructive">삭제</Button>
+          <Button size="sm" @click="deleteModel(gallery.id, 'gallery')" variant="destructive">삭제</Button>
         </span>
       </div>
       <!--      <div v-html="gallery.body"></div>-->
@@ -56,7 +40,7 @@ const destroy = (id) => {
   </div>
 
   <Modal :show="showEdit" @close="closeEdit">
-    <Edit @close="closeEdit" :modalData="modalData" :isAdmin="isAdmin" />
+    <Edit @close="closeEdit" :isAdmin="isAdmin" />
   </Modal>
 
 </template>
