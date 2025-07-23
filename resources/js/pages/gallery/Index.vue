@@ -29,9 +29,9 @@ const destroy = (id) => {
 </script>
 
 <template>
-  <div class="w-full text-left">
+  <div class="flex justify-start w-full gap-2">
     <h2 class="">Gallery</h2>
-    <Button v-if="isAdmin">
+    <Button v-if="isAdmin" size="sm">
       <Link :href="route('gallery.create')">글쓰기</Link>
     </Button>
   </div>

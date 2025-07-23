@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LogoController;
@@ -36,14 +37,24 @@ Route::get('silver', fn() => Inertia::render('Silver', ['banners' => BannerQuery
 
 Route::group(['prefix' => 'footprint'], function () {
   Route::get('gallery', [GalleryController::class, 'index'])->name('gallery');
-  Route::get('gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
-  Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
-  Route::patch('{gallery}', [GalleryController::class, 'update'])->name('gallery.update');
-  Route::delete('gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
-  Route::get('article', fn() => Inertia::render('article/Index'));
+
+  Route::get('article', [ArticleController::class, 'index'])->name('article');
   Route::get('note', fn() => Inertia::render('note/Index'));
+});
 
+Route::group(['middleware' => 'auth', 'prefix' => 'article', 'controller' => ArticleController::class], function () {
+  Route::get('create', 'create')->name('article.create');
+  Route::post('', 'store')->name('article.store');
+  Route::patch('{article}', 'update')->name('article.update');
+  Route::delete('article/{article}', 'destroy')->name('article.destroy');
+});
+
+Route::group(['middleware' => 'auth', 'controller' => GalleryController::class], function () {
+  Route::get('gallery/create', 'create')->name('gallery.create');
+  Route::post('gallery', 'store')->name('gallery.store');
+  Route::patch('gallery/{gallery}', 'update')->name('gallery.update');
+  Route::delete('gallery/{gallery}', 'destroy')->name('gallery.destroy');
 });
 
 Route::group(['prefix' => 'banner', 'middleware' => 'auth', 'controller' => BannerController::class], function () {
